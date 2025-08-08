@@ -1,5 +1,5 @@
 """
-WSGI config for financne_manager project.
+WSGI config for finance_manager project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'financne_manager.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'finance_manager.settings')
 
 application = get_wsgi_application()
