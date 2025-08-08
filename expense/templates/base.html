@@ -1,0 +1,30 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Finance Manager{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Finance Manager</h1>
+        <nav>
+            <a href="{% url 'dashboard' %}">Dashboard</a> |
+            <a href="{% url 'create_budget' %}">Add Budget</a> |
+            <a href="{% url 'budget_list' %}">Budgets</a> |
+            <a href="{% url 'expense_home' %}">Expenses</a> |
+            <a href="{% url 'logout' %}">Logout</a>
+        </nav>
+        <hr>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <hr>
+        <p>&copy; 2025 Finance Manager App</p>
+    </footer>
+</body>
+</html>

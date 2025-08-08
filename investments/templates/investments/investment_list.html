@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h4 class="mb-0">📈 Your Investments</h4>
+      <a href="{% url 'add_investment' %}" class="btn btn-light btn-sm fw-semibold">
+        + Add New
+      </a>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered mb-0">
+          <thead class="table-light">
+            <tr>
+              <th>Name</th>
+              <th>Amount</th>
+              <th>Target</th>
+              <th>Deadline</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for investment in investments %}
+            <tr>
+              <td>{{ investment.name }}</td>
+              <td>₹{{ investment.current_amount }}</td>
+              <td>₹{{ investment.target_amount }}</td>
+              <td>{{ investment.target_date }}</td>
+              <td>
+                {% if investment.current_amount >= investment.target_amount %}
+                  <span class="badge bg-success">✔ Completed</span>
+                {% else %}
+                  <span class="badge bg-warning text-dark">⏳ In Progress</span>
+                {% endif %}
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="5" class="text-center text-muted py-4">No investments yet.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

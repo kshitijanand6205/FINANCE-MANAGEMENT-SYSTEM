@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% block title %}Finance App{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">📊 Finance Report Dashboard</h2>
+
+    {% if over_budget %}
+    <div class="alert alert-danger fw-bold text-center" role="alert">
+        ⚠ Expenses ₹{{ total_expense }} exceeded your budget limit ₹{{ total_budget }}!
+    </div>
+    {% endif %}
+
+    <!-- Summary Cards -->
+    <div class="row text-center mb-4">
+        <div class="col-md-4 mb-3">
+            <div class="card border-success shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Total Income</h5>
+                    <p class="card-text text-success fw-bold fs-5">₹{{ total_income }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card border-danger shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Total Expense</h5>
+                    <p class="card-text text-danger fw-bold fs-5">₹{{ total_expense }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card border-primary shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Budget Allocated</h5>
+                    <p class="card-text text-primary fw-bold fs-5">₹{{ total_budget }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Monthly Expenses -->
+    <div class="mb-4">
+        <h4 class="mb-3">🧾 Monthly Expenses</h4>
+        {% if expenses %}
+        <ul class="list-group">
+            {% for e in expenses %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>{{ e.category }} - {{ e.date }}</span>
+                <span class="badge bg-danger">₹{{ e.amount }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No expenses recorded yet.</p>
+        {% endif %}
+    </div>
+
+    <!-- Monthly Income -->
+    <div class="mb-4">
+        <h4 class="mb-3">💰 Monthly Income</h4>
+        {% if income %}
+        <ul class="list-group">
+            {% for i in income %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>{{ i.source }} - {{ i.date }}</span>
+                <span class="badge bg-success">₹{{ i.amount }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No income recorded yet.</p>
+        {% endif %}
+    </div>
+
+    <!-- Investments -->
+    <div class="mb-4">
+        <h4 class="mb-3">📈 Investments Overview</h4>
+        {% if goals %}
+        <ul class="list-group">
+            {% for goal in goals %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>{{ goal.name }}</span>
+                <span class="badge bg-info text-dark">
+                    ₹{{ goal.current_amount }}/{{ goal.target_amount }}
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No investments yet.</p>
+        {% endif %}
+    </div>
+
+    <!-- View All Investments Button -->
+    <div class="text-center">
+        <a href="{% url 'investment_list' %}" class="btn btn-info">📊 View All Investments</a>
+    </div>
+</div>
+{% endblock %}
