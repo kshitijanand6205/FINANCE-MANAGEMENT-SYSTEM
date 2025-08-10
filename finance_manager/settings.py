@@ -35,8 +35,10 @@ DEBUG = 'RENDER' not in os.environ
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS = [RENDER_EXTERNAL_HOSTNAME, 'localhost', '127.0.0.1']
+    CSRF_TRUSTED_ORIGINS = ['https://{RENDER_EXTERNAL_HOSTNAME}']
 else:
     ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+    CSRF_TRUSTED_ORIGINS = []
 '''ALLOWED_HOSTS = ['.ngrok-free.app','127.0.0.1','localhost','.render']
 CSRF_TRUSTED_ORIGINS = ['https://*.ngrok-free.app']'''
 
